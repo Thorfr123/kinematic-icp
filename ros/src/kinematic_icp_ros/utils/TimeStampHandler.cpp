@@ -70,7 +70,7 @@ auto ExtractTimestampsFromMsg(const PointCloud2::ConstSharedPtr msg,
             // If the number of digits is greater than 10 (which is the maximum number of digits
             // that can be represented with a 32 bits integer), the stamp is in nanoseconds instead
             // of seconds, perform conversion
-            if (number_of_digits_decimal_part(stampd) > 10) {
+            if (number_of_digits_decimal_part(stampd) > 10 || timestamp_field.name == "t") {
                 stampd *= 1e-9;
             }
             timestamps.emplace_back(stampd);

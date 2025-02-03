@@ -66,9 +66,9 @@ OfflineNode::OfflineNode(const rclcpp::NodeOptions &options) {
     }
 
     auto bag_filename = node_->declare_parameter<std::string>("bag_filename");
-    const auto poses_filename = generateOutputFilename(bag_filename);
-    output_pose_file_ = std::filesystem::path(node_->declare_parameter<std::string>("output_dir"));
-    output_pose_file_ /= poses_filename;
+    // const auto poses_filename = generateOutputFilename(bag_filename);
+    // output_pose_file_ = std::filesystem::path(node_->declare_parameter<std::string>("output_dir"));
+    // output_pose_file_ /= poses_filename;
     auto tf_bridge = std::make_shared<BufferableBag::TFBridge>(node_);
     bag_multiplexer_.AddBag(BufferableBag(bag_filename, tf_bridge, lidar_topic_));
 }
@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
     rclcpp::init(argc, argv);
     auto offline_node = kinematic_icp_ros::OfflineNode(rclcpp::NodeOptions());
     offline_node.Run();
-    offline_node.writePosesInTumFormat();
+    // offline_node.writePosesInTumFormat();
     rclcpp::shutdown();
     return 0;
 }
